@@ -1,2 +1,2 @@
-# CalendarProject-GUIv2
-A updated version of my Calendar Project GUI, made with QT and C++
+# CalendarProject-GUI
+A Qt-based GUI for my calendar project.
