@@ -7,8 +7,8 @@ RemoveActivityDialog::RemoveActivityDialog(QWidget *parent)
     ui->setupUi(this);
     ui->buttonBox->button(QDialogButtonBox::Ok)->setText("Delete");
     ui->dateEdit->setDate(QDate::currentDate());
-    connect(this, SIGNAL(emitSearchDate(QDate)), parent, SLOT(recieveDate(QDate)));
-    connect(this, SIGNAL(emitSearchString(QString)), parent, SLOT(recieveMesg(QString)));
+    connect(this, SIGNAL(emitSearchDate(QDate)), parent, SLOT(receiveDate(QDate)));
+    connect(this, SIGNAL(emitSearchString(QString)), parent, SLOT(receiveMesg(QString)));
 }
 
 RemoveActivityDialog::~RemoveActivityDialog()

@@ -11,14 +11,18 @@ class RemoveActivityDialog : public QDialog
 {
     Q_OBJECT
 signals:
+
     void emitSearchString(const QString &c);
+
     void emitSearchDate(const QDate &d);
 
 public:
     explicit RemoveActivityDialog(QWidget *parent = nullptr);
+
     ~RemoveActivityDialog();
 
 private slots:
+
     void on_buttonBox_accepted();
 
 private:

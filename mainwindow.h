@@ -19,15 +19,24 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+
     ~MainWindow();
+
     void update(QDate o);
+
 public slots:
-    void recieveMesg(const QString &q);
-    void recieveDate(const QDate &p);
-    void recieveNewName(const QString &k);
-    void recieveNewDesc(const QString &l);
-    void recieveNewStartDate(const QDateTime &o);
-    void recieveNewEndaDate(const QDateTime &z);
+    void receiveMesg(const QString &q);
+
+    void receiveDate(const QDate &p);
+
+    void receiveNewName(const QString &k);
+
+    void receiveNewDesc(const QString &l);
+
+    void receiveNewStartDate(const QDateTime &o);
+
+    void receiveNewEndDate(const QDateTime &z);
+
 private slots:
     void on_actionCambia_fuso_orario_changed();
 
@@ -43,12 +52,19 @@ private slots:
 
 public:
     Ui::MainWindow *ui;
+
     Register *rg;
+
     QDate searchdate;
+
     QString searchstring;
+
     QString newname;
+
     QDateTime newStartDate;
+
     QDateTime newEndDate;
+
     QString newDesc;
 };
 #endif // MAINWINDOW_H

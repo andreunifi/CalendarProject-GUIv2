@@ -21,11 +21,12 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 void MainWindow::update(QDate o)
 {
     Date f;
-    f.ConvertFromQdate(o);
-    ui->textBrowser->setText(rg->output2(f));
+    f.convertFromQDate(o);
+    ui->textBrowser->setText(rg->outputToQString(f));
 }
 
 void MainWindow::on_actionCambia_fuso_orario_changed() {}
@@ -41,11 +42,11 @@ void MainWindow::on_pushButton_clicked()
     ed = ui->EndTimeEdit->time();
     f  = ui->CalendarWidget->selectedDate();
     Date c;
-    c.ConvertFromQdate(f);
-    c.COnvertFromQTime(sd);
+    c.convertFromQDate(f);
+    c.convertFromQTime(sd);
     Date e;
-    e.COnvertFromQTime(ed);
-    e.ConvertFromQdate(f);
+    e.convertFromQTime(ed);
+    e.convertFromQDate(f);
     Activity z("", "", c, e);
     if (ui->NameLine->text().isEmpty() && ui->DescName->text().isEmpty()) {
         //error message
@@ -67,7 +68,7 @@ void MainWindow::on_pushButton_clicked()
             z.setDescriptionName(n.toStdString());
             z.setName(o.toStdString());
             Date k;
-            k.ConvertFromQdate(f);
+            k.convertFromQDate(f);
             rg->addActivity(k, z);
             rg->printSpecificDay(k);
             MainWindow::update(ui->CalendarWidget->selectedDate());
@@ -96,12 +97,13 @@ void MainWindow::on_pushButton_2_clicked()
     if (p->exec() == 1) {
         Date s;
         std::string k;
-        s.ConvertFromQdate(searchdate);
+        s.convertFromQDate(searchdate);
         k = searchstring.toStdString();
-        rg->DeleteActivity(s, k);
+        rg->deleteActivity(s, k);
         MainWindow::update(ui->CalendarWidget->selectedDate());
     }
 }
+
 //edit Activity
 void MainWindow::on_pushButton_3_clicked()
 {
@@ -112,49 +114,51 @@ void MainWindow::on_pushButton_3_clicked()
         //if il dialogo è stato accettato
         //code for searching activity by name and start date
         Date converted;
-        converted.ConvertFromQdate(searchdate);
+        converted.convertFromQDate(searchdate);
         std::string st;
         st = searchstring.toStdString();
         //code for editing the activity
         Date pa;
-        pa.ConvertFromQdate(MainWindow::newStartDate.date());
+        pa.convertFromQDate(MainWindow::newStartDate.date());
         std::string k;
         Date ka;
-        ka.ConvertFromQdate(MainWindow::newStartDate.date());
-        ka.COnvertFromQTime(MainWindow::newStartDate.time());
+        ka.convertFromQDate(MainWindow::newStartDate.date());
+        ka.convertFromQTime(MainWindow::newStartDate.time());
         Date ed;
-        ed.ConvertFromQdate(MainWindow::newEndDate.date());
-        ed.COnvertFromQTime(MainWindow::newEndDate.time());
+        ed.convertFromQDate(MainWindow::newEndDate.date());
+        ed.convertFromQTime(MainWindow::newEndDate.time());
         k = MainWindow::newname.toStdString();
         rg->editActivity(converted, st, pa, ka, ed, k);
         MainWindow::update(ui->CalendarWidget->selectedDate());
     }
 }
-void MainWindow::recieveMesg(const QString &q)
+
+void MainWindow::receiveMesg(const QString &q)
 {
     MainWindow::searchstring = q;
 }
-void MainWindow::recieveDate(const QDate &p)
+
+void MainWindow::receiveDate(const QDate &p)
 {
     MainWindow::searchdate = p;
 }
 
-void MainWindow::recieveNewName(const QString &k)
+void MainWindow::receiveNewName(const QString &k)
 {
     MainWindow::newname = k;
 }
 
-void MainWindow::recieveNewDesc(const QString &l)
+void MainWindow::receiveNewDesc(const QString &l)
 {
     MainWindow::newDesc = l;
 }
 
-void MainWindow::recieveNewStartDate(const QDateTime &o)
+void MainWindow::receiveNewStartDate(const QDateTime &o)
 {
     MainWindow::newStartDate = o;
 }
 
-void MainWindow::recieveNewEndaDate(const QDateTime &z)
+void MainWindow::receiveNewEndDate(const QDateTime &z)
 {
     MainWindow::newEndDate = z;
 }
